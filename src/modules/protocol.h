@@ -29,7 +29,8 @@ enum class RequestMsgCodes : uint8_t {
     FilamentType = 'F',
     FilamentSensor = 'f',
     Home = 'H',
-    Read = 'R'
+    Read = 'R',
+    Slack = 'A'
 };
 
 /// Definition of response message parameter codes

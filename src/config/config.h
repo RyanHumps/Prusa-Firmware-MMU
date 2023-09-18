@@ -103,6 +103,7 @@ static constexpr U_mm fsensorToNozzle = 30.0_mm; ///< ~20mm from MK4's filament 
 static constexpr U_mm fsensorToNozzleAvoidGrind = 5.0_mm;
 /// Check the state of FSensor after this amount of filament got (hopefully) pulled out while unloading.
 static constexpr U_mm fsensorUnloadCheckDistance = 40.0_mm;
+static constexpr U_mm slackLength = 250.0_mm;
 
 /// Begin: Pulley axis configuration
 static constexpr AxisConfig pulley = {

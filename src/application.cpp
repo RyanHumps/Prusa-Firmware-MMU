@@ -22,6 +22,7 @@
 #include "logic/start_up.h"
 #include "logic/tool_change.h"
 #include "logic/unload_filament.h"
+#include "logic/slack_filament.h"
 
 #include "version.hpp"
 
@@ -131,6 +132,9 @@ void __attribute__((noinline)) Application::PlanCommand(const modules::protocol:
             break;
         case mp::RequestMsgCodes::Mode:
             currentCommand = &logic::setMode;
+            break;
+        case mp::RequestMsgCodes::Slack:
+            currentCommand = &logic::slackFilament;
             break;
         default:
             currentCommand = &logic::noCommand;
@@ -257,6 +261,7 @@ void Application::ProcessRequestMsg(const mp::RequestMsg &rq) {
     case mp::RequestMsgCodes::Load:
     case mp::RequestMsgCodes::Tool:
     case mp::RequestMsgCodes::Unload:
+    case mp::RequestMsgCodes::Slack:
         PlanCommand(rq);
         break;
     case mp::RequestMsgCodes::FilamentSensor: // set filament sensor state in the printer

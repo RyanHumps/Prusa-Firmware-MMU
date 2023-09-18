@@ -16,4 +16,5 @@ target_sources(
           tool_change.cpp
           unload_filament.cpp
           unload_to_finda.cpp
+          slack_filament.cpp
   )
