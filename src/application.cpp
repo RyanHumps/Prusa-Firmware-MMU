@@ -63,8 +63,8 @@ void __attribute__((noinline)) Application::CheckManualOperation() {
             case mui::Event::Middle:
                 // plan load
                 if (mg::globals.ActiveSlot() < config::toolCount) { // do we have a meaningful selector position?
-                    logic::loadFilament.Reset(mg::globals.ActiveSlot());
-                    currentCommand = &logic::loadFilament;
+                    logic::slackFilament.Reset(mg::globals.ActiveSlot());
+                    currentCommand = &logic::slackFilament;
                 }
                 break;
             case mui::Event::Right:
