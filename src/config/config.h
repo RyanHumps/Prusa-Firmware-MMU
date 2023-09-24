@@ -127,6 +127,7 @@ static constexpr U_mm_s pulleyUnloadFeedrate = 95._mm_s;
 /// 120mm_s is too much, the printer cannot send the status of fsensor that fast
 /// and false fsensor_not_triggered errors start to occur
 static constexpr U_mm_s pulleyLoadFeedrate = 95._mm_s;
+static constexpr U_mm_s pulleySlackFeedrate = 50._mm_s;
 static constexpr U_mm_s pulleySlowFeedrate = 20._mm_s;
 /// End: Pulley axis configuration
 

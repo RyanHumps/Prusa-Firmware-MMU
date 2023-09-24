@@ -79,6 +79,10 @@ public:
     void ResetPulleySlowFeedrate() { pulleySlowFeedrate_mm_s = config::pulleySlowFeedrate.v; }
     void SetPulleySlowFeedrate_mm_s(uint16_t pulleySlowFR_mm_s) { pulleySlowFeedrate_mm_s = pulleySlowFR_mm_s; }
 
+    config::U_mm_s PulleySlackFeedrate_mm_s() const { return config::U_mm_s({ (long double)pulleySlackFeedrate_mm_s }); }
+    void ResetPulleySlackFeedrate() { pulleySlackFeedrate_mm_s = config::pulleySlackFeedrate.v; }
+    void SetPulleySlackFeedrate_mm_s(uint16_t pulleySlackFR_mm_s) { pulleySlackFeedrate_mm_s = pulleySlackFR_mm_s; }
+
     config::U_mm_s PulleyUnloadFeedrate_mm_s() const { return config::U_mm_s({ (long double)pulleyUnloadFeedrate_mm_s }); }
     void ResetPulleyUnloadFeedrate() { pulleyUnloadFeedrate_mm_s = config::pulleyUnloadFeedrate.v; }
     void SetPulleyUnloadFeedrate_mm_s(uint16_t pulleyUnloadFR_mm_s) { pulleyUnloadFeedrate_mm_s = pulleyUnloadFR_mm_s; }
@@ -123,6 +127,7 @@ private:
 
     uint16_t pulleyLoadFeedrate_mm_s;
     uint16_t pulleySlowFeedrate_mm_s;
+    uint16_t pulleySlackFeedrate_mm_s;
     uint16_t pulleyUnloadFeedrate_mm_s;
 
     uint16_t selectorFeedrate_mm_s;

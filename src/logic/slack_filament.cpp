@@ -35,7 +35,7 @@ bool SlackFilament::StepInner() {
             // plan a fast move while in the safe minimal length
             // fast feed in millimeters - if the EEPROM value is incorrect, we'll get the default length
             mpu::pulley.PlanMove(config::slackLength,
-                mg::globals.PulleyLoadFeedrate_mm_s(),
+                mg::globals.PulleySlackFeedrate_mm_s(),
                 mg::globals.PulleySlowFeedrate_mm_s());
         }
         return false;
