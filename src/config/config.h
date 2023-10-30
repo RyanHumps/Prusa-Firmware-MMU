@@ -18,7 +18,10 @@
 /// Wrangler for assorted compile-time configuration and constants.
 namespace config {
 
-static constexpr const uint8_t toolCount = 5U; ///< Max number of extruders/tools/slots
+/// Max number of extruders/tools/slots
+/// Beware - if you change this, the EEPROM structure will become invalid and no migration procedures have been implemented.
+/// So if you really have to change this, erase your EEPROM content then.
+static constexpr const uint8_t toolCount = 5U;
 static_assert(toolCount < 15, "Up to 14 valid slots (+1 parking) is supported in EEPROM storage");
 
 // Printer's filament sensor setup
@@ -82,19 +85,19 @@ static constexpr U_mm pulleyToCuttingEdge = 33.0_mm; /// 33.0_mm /// Pulley to c
 static constexpr U_mm filamentMinLoadedToMMU = 20.0_mm; /// Limit of retraction.
 static constexpr U_mm ejectFromCuttingEdge = 40.0_mm; /// Eject should ignore FilamentMinLoadedToMMU and retract
 static constexpr U_mm cuttingEdgeRetract = 5.0_mm; /// Cutting retraction distance (filament should be flush with outlet)
-static constexpr U_mm cuttingEdgeToFinda = 18.5_mm; /// Cutting edge to FINDA MMU2 side -1mm tolerance should be ~18.5. FINDA shouldn't trigger here.
+static constexpr U_mm cuttingEdgeToFinda = 18.5_mm; /// Cutting edge to FINDA MMU side -1mm tolerance should be ~18.5. FINDA shouldn't trigger here.
 static constexpr U_mm findaTriggerDistance = 4.5_mm; /// FINDA trigger distance +1.0_mm tolerance.
 static constexpr U_mm cuttingEdgeToFindaMidpoint = 22.85_mm; /// Cutting edge to Midpoint of FINDA should be 22.85_mm.
 static constexpr U_mm findaToCoupler = 12.0_mm; /// FINDA Coupler side to coupler screw.
-static constexpr U_mm couplerToBowden = 3.5_mm; /// FINDA Coupler screw to bowden mmu2s side (in coupling).
+static constexpr U_mm couplerToBowden = 3.5_mm; /// FINDA Coupler screw to bowden mmu side (in coupling).
 
-// @@TODO this is very tricky - the same MMU, same PTFE,
-// just another piece of PLA (probably having more resistance in the tubes)
-// and we are at least 40mm off! It looks like this really depends on the exact position
-// We'll probably need to check for StallGuard while pushing the filament to avoid ginding the filament
-static constexpr U_mm defaultBowdenLength = 427.0_mm; ///< ~427.0_mm - Default Bowden length. TODO Should be stored in EEPROM. 392 a 784
-static constexpr U_mm minimumBowdenLength = 341.0_mm; ///< ~341.0_mm - Minimum bowden length. TODO Should be stored in EEPROM.
-static constexpr U_mm maximumBowdenLength = 792.0_mm; ///< ~792.0_mm - Maximum bowden length. TODO Should be stored in EEPROM.
+// Min, max and default bowden length setup
+static constexpr U_mm defaultBowdenLength = 360.0_mm; /// ~360.0_mm - Default Bowden length.
+static constexpr U_mm minimumBowdenLength = 341.0_mm; /// ~341.0_mm - Minimum bowden length.
+static constexpr U_mm maximumBowdenLength = 1000.0_mm; /// ~1000.0_mm - Maximum bowden length.
+static_assert(minimumBowdenLength.v <= defaultBowdenLength.v);
+static_assert(maximumBowdenLength.v > defaultBowdenLength.v);
+
 static constexpr U_mm feedToFinda = cuttingEdgeToFindaMidpoint + filamentMinLoadedToMMU;
 static constexpr U_mm maximumFeedToFinda = feedToFinda + 20.0_mm; ///< allow for some safety margin to load to FINDA
 static constexpr U_mm pulleyHelperMove = 10.0_mm; ///< Helper move for Load/Unload error states - when the MMU should slowly move the filament a bit
@@ -156,7 +159,7 @@ static constexpr U_mm SelectorOffsetFromMax = 1.0_mm; /// Selector offset from h
 static constexpr U_mm SelectorOffsetFromMin = 75.5_mm; /// Selector offset from home min to slot 0
 
 /// slots 0-4 are the real ones, the 5th is the farthest parking positions
-/// selector.dirOn = true = Home at max: selector hits left side of the MMU2S body
+/// selector.dirOn = true = Home at max: selector hits left side of the MMU body
 /// selector.dirOn = false = Home at min: selector POM nut hit the selector motor
 static constexpr U_mm selectorSlotPositions[toolCount + 1] = {
 
