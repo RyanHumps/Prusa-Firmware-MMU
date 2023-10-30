@@ -166,7 +166,6 @@
 | 0x20h 32 | uint16   | Set/Get Idler iRun current | 0-31         | 1fh 31      | 31->530mA: see TMC2130 current conversion| Read / Write | M707 A0x20 | M708 A0x20 Xn
 | 0x21h 33 | uint16   | Reserved for internal use  | 225          |             | N/A                                      | N/A          | N/A        | N/A
 | 0x22h 34 | uint16   | Bowden length              | 341-1000     | 168h 360    | unit mm                                  | Read / Write Persistent | M707 A0x22 | M708 A0x22 Xn
-| 0x23h 35 | uint16   | Pulley_slow_feedrate       | 0000h 0      | 0032h 50    | unit mm/s                                | Read / Write | M707 A0x23 | M708 A0x23 Xnnnn
 */
 
 struct __attribute__((packed)) RegisterFlags {
@@ -436,11 +435,6 @@ static const RegisterRec registers[] PROGMEM = {
     RegisterRec(
         []() -> uint16_t { return mps::BowdenLength::Get(); },
         [](uint16_t d) { mps::BowdenLength::Set(d); },
-        2),
-    // 0x23 Pulley slack feedrate [mm/s] RW
-    RegisterRec(
-        []() -> uint16_t { return mg::globals.PulleySlackFeedrate_mm_s().v; },
-        [](uint16_t d) { mg::globals.SetPulleySlackFeedrate_mm_s(d); },
         2),
 };
 

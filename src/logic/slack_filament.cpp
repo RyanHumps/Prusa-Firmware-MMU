@@ -1,6 +1,5 @@
 /// @file slack_filament.cpp
 #include "slack_filament.h"
-#include "../modules/finda.h"
 #include "../modules/globals.h"
 #include "../modules/idler.h"
 #include "../modules/motion.h"
@@ -32,10 +31,9 @@ bool SlackFilament::StepInner() {
         if (mi::idler.Engaged()) {
             state = ProgressCode::SlackingFilament;
             mpu::pulley.InitAxis();
-            // plan a fast move while in the safe minimal length
             // fast feed in millimeters - if the EEPROM value is incorrect, we'll get the default length
+                mg::globals.PulleyLoadFeedrate_mm_s() / 2,
             mpu::pulley.PlanMove(config::slackLength,
-                mg::globals.PulleySlackFeedrate_mm_s(),
                 mg::globals.PulleySlowFeedrate_mm_s());
         }
         return false;

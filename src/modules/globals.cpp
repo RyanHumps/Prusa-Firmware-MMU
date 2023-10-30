@@ -27,7 +27,6 @@ void Globals::Init() {
 
     ResetPulleyLoadFeedrate();
     ResetPulleySlowFeedrate();
-    ResetPulleySlackFeedrate();
     ResetPulleyUnloadFeedrate();
 
     ResetSelectorFeedrate();
