@@ -7,7 +7,7 @@ import fnmatch
 # declarations
 sourceFile=sys.argv[1]
 eLen = 0.0
-slackInterval = 250.0
+slackInterval = 190.0
 zLayer = 0.0
 
 # read file into memory
